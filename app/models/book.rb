@@ -24,8 +24,17 @@ class Book < ApplicationRecord
     return count_result
   end
 
-  def self.sort_books_favorite_desc
-    result = ActiveRecord::Base.connection.select_all('select b.*, f.cnt from books b left outer join (select book_id, count(book_id) as cnt from favorites group by book_id) f on b.id = f.book_id order by f.cnt desc')
+  def self.sort_books_favorite_desc(*args)
+    if args.length == 0
+      result = ActiveRecord::Base.connection.select_all('select b.*, f.cnt from books b left outer join (select book_id, count(book_id) as cnt from favorites group by book_id) f on b.id = f.book_id order by f.cnt desc')
+    elsif args.length == 1
+      #プレースホルダー
+      sql = ActiveRecord::Base.sanitize_sql_array(['select b.*, f.cnt from books b left outer join (select book_id, count(book_id) as cnt from favorites group by book_id) f on b.id = f.book_id where b.user_id = (:user_id) order by f.cnt desc', user_id: args[0]])
+      #生SQL実行
+      result = ActiveRecord::Base.connection.select_all(sql)
+    else
+      result = 0
+    end
     return result.to_a
   end
 
