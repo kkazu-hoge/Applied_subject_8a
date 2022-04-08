@@ -1,6 +1,7 @@
 class Relationship < ApplicationRecord
   belongs_to :user, foreign_key: "followed_id"
   belongs_to :follower, foreign_key: "follower_id"
+  has_many :chats, foreign_key: "relationship_id", dependent: :destroy
   # class_name: "User",
   # class_name: "Follower",
 

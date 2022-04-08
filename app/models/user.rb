@@ -10,7 +10,9 @@ class User < ApplicationRecord
   # フォロー機能
   has_many :relationships, foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :relationships, dependent: :destroy
-
+  
+  has_many :chats, foreign_key: "from_id"
+  
   has_one_attached :profile_image
 
 

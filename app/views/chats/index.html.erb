@@ -1,0 +1,46 @@
+<!--JSファイルをwebpackerから呼び出し-->
+<!--%= javascript_pack_tag 'chat_submit' %>-->
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <h1><%= @to_user.name %>さんとのチャット</h1>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>Message</th>
+            <th>From</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @chat_index.each do |c| %>
+            <tr>
+              <td><%= c.message %></td>
+              <td><%= User.find(c.from_id).name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class='row'>
+        <div class='col-md-8'>
+          <!--javascriptで記述-->
+          <!--<div class="form-group ">-->
+          <!--  <input type="text" name="chat_1", class= "form-control introduction", id= "chat_message">-->
+          <!--</div>-->
+          <!--<input type="hidden" name="chat_2" value="%= @to_user.id %>" id= "user_id">-->
+          <!--<input type="hidden" name="chat_3" value="%= @relationship_id %>" id= "relationship_id">-->
+          <!--<input type="button" id="test" value="送信">-->
+         <!--railsで記述-->
+          <%= form_with model:@chat_message, url: user_relationship_chats_path(@to_user.id, @relationship_id, from_user_id: @from_user.id ), local:true do |f| %>
+            <%= render 'layouts/errors', obj: @chat_message %>
+            <div class="form-group">
+              <%= f.text_area :message, class: "form-control introduction", id: "chat_message" %>
+            </div>
+            <div class="form-group">
+              <%= f.submit class: 'btn btn-secondary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
