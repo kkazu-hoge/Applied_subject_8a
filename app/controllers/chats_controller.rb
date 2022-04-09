@@ -14,11 +14,11 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = Chat.new(chat_message_params)
-    @chat.from_id = params[:from_user_id]
-    @chat.relationship_id = params[:relationship_id]
-    # binding.pry
-    @chat.save
+    # @chat = Chat.new(chat_message_params)
+    # @chat.from_id = params[:from_user_id]
+    # @chat.relationship_id = params[:relationship_id]
+    # # binding.pry
+    # @chat.save
     redirect_to user_relationship_chats_path(params[:user_id], params[:relationship_id])
   end
 

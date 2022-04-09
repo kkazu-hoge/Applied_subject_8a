@@ -24,7 +24,7 @@
     //     if (event.key === 'Enter') {
     //         sayHello();
     //     }
-    // }
+    // };
 
     var btn = document.getElementById('chat_message');
     // Enterキー押下時、送信処理が実行する
@@ -43,7 +43,7 @@
                       user_id: $('#user_id').val(),
                       relationship_id: $('#relationship_id').val()
                       },
-              dataType: "json",
+              dataType: "html",
               success: function(data) {
                   alert("success");
               },
@@ -52,7 +52,7 @@
               }
           });
         }
-    }
+    };
 
 // $("#chat_message").on('onkeydown', function(event){
 //     var L_user_id = $('#user_id').val();
