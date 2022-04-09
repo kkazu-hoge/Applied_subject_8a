@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'chats/show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root :to =>'homes#top'
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
     resources :relationships, only: [:create, :destroy] do
       get :follow_index, on: :collection
       get :follower_index, on: :collection
+      resources :chats, only: [:index, :create]
     end
   end
 
@@ -74,5 +76,6 @@ end
           # user_relationship DELETE /users/:user_id/relationships/:id(.:format)   relationships#destroy
 # follow_index_user_relationships GET    /users/:user_id/relationships/follow_index(.:format)    relationships#follow_index
 # follower_index_user_relationships GET  /users/:user_id/relationships/follower_index(.:format)  relationships#follower_index
-
+          #               chats_show GET    /chats/show(.:format)                                  chats#show
+          # user_relationship_chats GET    /users/:user_id/relationships/:relationship_id/chats(.:format)    chats#index
 
